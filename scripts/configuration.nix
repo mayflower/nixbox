@@ -13,7 +13,7 @@
   boot.loader.grub.device = "/dev/sda";
 
   # remove the fsck that runs at startup. It will always fail to run, stopping
-  # your boot until you press *. 
+  # your boot until you press *.
   boot.initrd.checkJournalingFS = false;
 
   # Services to enable:
@@ -22,7 +22,7 @@
   services.openssh.enable = true;
 
   # Enable DBus
-  services.dbus.enable    = true;
+  services.dbus.enable = true;
 
   # Replace nptd by timesyncd
   services.timesyncd.enable = true;
@@ -73,4 +73,14 @@
       %wheel ALL=(ALL) NOPASSWD: ALL, SETENV: ALL
     '';
 
+  nix = {
+    binaryCaches = [ "https://hydra.mayflower.de" "https://cache.nixos.org" ];
+    trustedBinaryCaches = [ "https://hydra.mayflower.de" "https://cache.nixos.org" ];
+    binaryCachePublicKeys = [
+      "hydra.mayflower.de:9knPU2SJ2xyI0KTJjtUKOGUVdR2/3cOB4VNDQThcfaY="
+    ];
+    extraOptions = ''
+      auto-optimise-store = true
+    '';
+  };
 }
