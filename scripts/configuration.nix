@@ -21,14 +21,8 @@
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
-  # Enable DBus
-  services.dbus.enable = true;
-
-  # Replace nptd by timesyncd
-  services.timesyncd.enable = true;
-
-  # Enable guest additions.
-  virtualisation.virtualbox.guest.enable = true;
+  # Replace nptd by chrony
+  services.chrony.enable = true;
 
   # Packages for Vagrant
   environment.systemPackages = with pkgs; [
@@ -38,6 +32,7 @@
     netcat
     nfs-utils
     rsync
+    vim
   ];
 
   # Creates a "vagrant" users with password-less sudo access
@@ -82,5 +77,6 @@
     extraOptions = ''
       auto-optimise-store = true
     '';
+    maxJobs = 4;
   };
 }
